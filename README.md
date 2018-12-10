@@ -30,6 +30,7 @@ This module offers multiple functions to interact with the Runtastic-API. Most o
 - [.fetchWeight(count, timeframe, callback(err, weights))](#weight)
 - [.fetchHeartrate(count, timeframe, callback(err, heartrates))](#heartrate)
 - [.fetchAll(count, timeframe, callback(err, results))](#all)
+- [.creatGPXContent(activityDetails, callback(err, gpxContent))](#gpxContent)
 - [.logout(callback(err, status))](#logout)
 
 <a name="login"></a>
@@ -119,6 +120,24 @@ callback|```Function```| Needs to be a function which will be called as soon as 
 
 runtasticApi.fetchHeartrate(10, {'from': new Date('2016/01/01'), 'to': new Date()}, function(err, heartrates) {
   // Do something with the returned data.
+});
+```
+
+<a name="gpxContent"></a>
+####.creatGPXContent(activityDetails, callback(err, gpxContent))####
+Get the GPX body for the given activityDetails. Can be written into a .GPX file to export data.
+
+Variable|Acceptable Types|Behavior
+---|---|---
+activityDetails|```Object```|ActivityDetails as provided by ```.fetchActivityDetails()```
+callback|```Function```| Needs to be a function which will be called as soon as the body rendering has been finished and returns a ```String``` representing the XML content of a GPX file.
+
+#####Example#####
+```js
+runtasticApi.fetchActivityDetails(<id>, true, function(err, details) {
+    runtasticApi.createGPXContent(details, (err, body) => {
+        // Do something with body, like writing to GPX file
+    });
 });
 ```
 
